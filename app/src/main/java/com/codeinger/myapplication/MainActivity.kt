@@ -12,13 +12,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Log.i("fdhjvef", "onCreate : ${Thread.currentThread().name}")
-
         GlobalScope.launch {
-            Log.i("fdhjvef", "coroutine launch in : ${Thread.currentThread().name}")
-            delay(3000)
-            Log.i("fdhjvef", "delay complete : ${Thread.currentThread().name}")
+            Log.i("ekjfhcekjfn", "satrt: ")
+            networkCall1()
+            Log.i("ekjfhcekjfn", "end: ")
         }
 
+
+    }
+
+    suspend fun networkCall1(){
+        delay(3000)
+        Log.i("ekjfhcekjfn", "networkCall1: ")
+        networkCall2()
+    }
+
+    fun networkCall2(){
+        Log.i("ekjfhcekjfn", "networkCall2: ")
     }
 }
