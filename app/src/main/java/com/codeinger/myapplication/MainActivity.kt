@@ -4,35 +4,40 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {
-
-    private val viewModel : MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var button = findViewById<Button>(R.id.button)
-        button.setOnClickListener {
-             startActivity(Intent(this,NextActivity::class.java))
-             finish()
+        runBlocking {
+            test1()
         }
 
+    }
 
-        viewModel.run()
+    suspend fun test(){
+        val job = lifecycleScope.launch {
+            delay(2000)
+            Log.i("fdkjcjkdfn", "2 sec finish: ")
+        }
 
+        job.join()
+        Log.i("fdkjcjkdfn", "test: ")
+    }
 
-
-
-
+    suspend fun test1(){
+        val deferred : Deferred<Int> = lifecycleScope.async {
+            delay(2000)
+            Log.i("fdkjcjkdfn", "2 sec finish: ")
+            10
+        }
+        val value = deferred.await()
+        Log.i("fdkjcjkdfn", "test: "+value)
     }
 
 
