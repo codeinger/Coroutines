@@ -1,33 +1,39 @@
 package com.codeinger.myapplication
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
+
+    private val viewModel : MainViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        GlobalScope.launch {
-            Log.i("ekjfhcekjfn", "satrt: ")
-            networkCall1()
-            Log.i("ekjfhcekjfn", "end: ")
+        var button = findViewById<Button>(R.id.button)
+        button.setOnClickListener {
+             startActivity(Intent(this,NextActivity::class.java))
+             finish()
         }
 
 
+        viewModel.run()
+
+
+
+
+
     }
 
-    suspend fun networkCall1(){
-        delay(3000)
-        Log.i("ekjfhcekjfn", "networkCall1: ")
-        networkCall2()
-    }
 
-    fun networkCall2(){
-        Log.i("ekjfhcekjfn", "networkCall2: ")
-    }
 }
