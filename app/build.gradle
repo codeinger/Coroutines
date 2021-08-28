@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -45,11 +46,20 @@ dependencies {
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1'
 
-    implementation "androidx.activity:activity-ktx:1.3.0"
-    implementation "androidx.fragment:fragment-ktx:1.3.6"
-
-    def lifecycle_version = "2.4.0-alpha02"
-    // ViewModel
+    def lifecycle_version = "2.4.0-alpha03"
+    // ViewModel LiveData
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+
+    def room_version = "2.3.0"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    def activity_version = "1.3.1"
+    implementation "androidx.activity:activity-ktx:$activity_version"
+
+    def fragment_version = "1.3.6"
+    implementation "androidx.fragment:fragment-ktx:$fragment_version"
+
 
 }
